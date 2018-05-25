@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.dao.KeynMapper">
+  <resultMap id="BaseResultMap" type="com.test.domain.Keyn">
+    <result column="GP_CODE" jdbcType="NVARCHAR" property="gpCode" />
+    <result column="GP_NAME" jdbcType="NVARCHAR" property="gpName" />
+    <result column="CODE" jdbcType="NVARCHAR" property="code" />
+    <result column="NAME" jdbcType="NVARCHAR" property="name" />
+    <result column="DEL_FLAG" jdbcType="NVARCHAR" property="delFlag" />
+    <result column="CREATE_USER" jdbcType="NVARCHAR" property="createUser" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_USER" jdbcType="NVARCHAR" property="updateUser" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="SUB_NAME" jdbcType="NVARCHAR" property="subName" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    GP_CODE, GP_NAME, CODE, NAME, DEL_FLAG, CREATE_USER, CREATE_DATE, UPDATE_USER, UPDATE_DATE, SUB_NAME
+  </sql>
+
+  <select id="selectGpCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT  <include refid="Base_Column_List"/>
+    FROM KEYN
+    WHERE GP_CODE = #{gpCode,jdbcType=NVARCHAR}
+  </select>
+
+  <insert id="insert" parameterType="com.test.domain.Keyn">
+    insert into PSPUSER.KEYN (GP_CODE, GP_NAME, CODE, 
+      NAME, DEL_FLAG, CREATE_USER, 
+      CREATE_DATE, UPDATE_USER, UPDATE_DATE, 
+      SUB_NAME)
+    values (#{gpCode,jdbcType=NVARCHAR}, #{gpName,jdbcType=NVARCHAR}, #{code,jdbcType=NVARCHAR}, 
+      #{name,jdbcType=NVARCHAR}, #{delFlag,jdbcType=NVARCHAR}, #{createUser,jdbcType=NVARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=NVARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{subName,jdbcType=NVARCHAR})
+  </insert>
+
+</mapper>
